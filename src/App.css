@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.app-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+.game-container{
+  padding: 1%
+}
+.game-pic{
+  width: 300px;
+  height: 200px
+}
