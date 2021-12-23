@@ -1,34 +1,53 @@
-import React, {useEffect, useState} from "react"
-import axios from "axios";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getGameList } from "../actions";
 
-const Home  = () => {
-    const [data, setData] = useState([]);
-    const api_key = "ccf87acd225b44498a3b6dd28aaa475b";
-    useEffect(() => {
-      axios
-        .get(`https://api.rawg.io/api/games?key=${api_key}&page_size=50`)
-        .then((res) => {
-          setData(res.data.results);
-        });
-    }, []);
-    console.log(data);
+const Home = (props) => {
+  // const [data, setData] = useState([]);
   
-    return (
-      <div className="app-container">
-        {data.length === 0 ? (
-          <h2>loading</h2>
-        ) : (
-          data.map((game) => {
-            return (
-              <div className="game-container" key={game.slug}>
-                <h2>{game.name}</h2>
-                <img className='game-pic' src={game.background_image} alt='Cover of game'/>
-              </div>
-            );
-          })
-        )}
-      </div>
-    );
+  // useEffect(() => {
+  //   axios
+  //     .get(`https://api.rawg.io/api/games?key=${api_key}&page_size=50`)
+  //     .then((res) => {
+  //       setData(res.data.results);
+  //     });
+  // }, []);
+  // console.log(data);
+  useEffect(() => {
+    console.log(getGameList())
+    props.getGameList()
+  }, [])
+  const {gameList, loading } = props
+
+  return (
+    <div className="app-container">
+      {loading ? (
+        <h2>loading</h2>
+      ) : (
+        gameList.map((game) => {
+          return (
+            <div className="game-container" key={game.slug}>
+              <h2>{game.name}</h2>
+              <Link to={`/game/${game.id}`}>
+                <img
+                  className="game-pic"
+                  src={game.background_image}
+                  alt="Cover of game"
+                />
+              </Link>
+            </div>
+          );
+        })
+      )}
+    </div>
+  );
+};
+const mapStateToProps = (state) => {
+  return {
+    gameList: state.gameList,
+    loading: state.loading
+  }
 }
 
-export default Home;
+export default connect(mapStateToProps,{ getGameList })(Home);
