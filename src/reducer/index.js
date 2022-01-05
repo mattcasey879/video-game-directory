@@ -11,6 +11,7 @@ const INITIAL_STATE = {
     loading: false,
     error: null,
     game: {},
+    page: 1
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -24,7 +25,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         return({
             ...state,
             loading: false,
-            gameList: action.payload
+            gameList: state.gameList.concat(action.payload),
+            page: state.page + 1
         })
         case GET_GAME_LIST_FAIL:
         return({

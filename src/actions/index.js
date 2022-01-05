@@ -10,11 +10,11 @@ export const GET_GAME_LOADING = "GET_GAME_LOADING";
 
 const api_key = "ccf87acd225b44498a3b6dd28aaa475b";
 
-export const getGameList = () => (dispatch) => {
+export const getGameList = (pageNum) => (dispatch) => {
   console.log("HITTING GAME LIST FUNCTION");
   dispatch({ type: GET_GAME_LOADING });
   axios
-    .get(`https://api.rawg.io/api/games?key=${api_key}&page_size=50`)
+    .get(`https://api.rawg.io/api/games?key=${api_key}&page_size=24&page=${pageNum}`)
     .then((res) => {
       console.log(res.data.results);
       dispatch({ type: GET_GAME_LIST_SUCCESS, payload: res.data.results });

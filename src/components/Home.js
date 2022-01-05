@@ -1,52 +1,59 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getGameList } from "../actions";
 
 const Home = (props) => {
-  // const [data, setData] = useState([]);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`https://api.rawg.io/api/games?key=${api_key}&page_size=50`)
-  //     .then((res) => {
-  //       setData(res.data.results);
-  //     });
-  // }, []);
-  // console.log(data);
   useEffect(() => {
-    console.log(getGameList());
-    props.getGameList();
+    props.getGameList(1);
   }, []);
+  const observer = useRef();
+  const lastGame = useCallback((node) => {
+    console.log(node);
+    if (observer.current) observer.current.disconnect();
+    observer.current = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        console.log("Visible");
+        props.getGameList(props.page);
+      }
+    });
+    if (node) observer.current.observe(node);
+  });
   const { gameList, loading } = props;
-
   return (
     <div className="app-container">
-      {loading ? (
-        <h2>loading</h2>
-      ) : (
-        gameList.map((game) => {
+      {gameList.map((game, index) => {
+        if (gameList.length === index + 1) {
           return (
-            <div className="game-container" key={game.slug}>
-              <Link to={`/game/${game.id}`}>
-                <img
-                  className="game-pic"
-                  src={game.background_image}
-                  alt="Cover of game"
-                />
+            <div ref={lastGame} className="game-container" key={game.slug}>
+              <Link
+                className="game-pic"
+                to={`/game/${game.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <img src={game.background_image} alt="Cover of game" />
+                <div className="layer"></div>
+                <h2 className="gameTitle">{game.name}</h2>
               </Link>
-              <h2 className="gameTitle">{game.name}</h2>
-              <h3>Available Platforms:</h3>
-                <div className="platform-container">
-                  {" "}
-                  {game.platforms.map((plat) => {
-                    return <p key={plat.platform.name}>{plat.platform.name}</p>;
-                  })}
-                </div>
             </div>
           );
-        })
-      )}
+        } else {
+          return (
+            <div className="game-container" key={game.slug}>
+              <Link
+                className="game-pic"
+                to={`/game/${game.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <img src={game.background_image} alt="Cover of game" />
+                <div className="layer"></div>
+                <h2 className="gameTitle">{game.name}</h2>
+              </Link>
+            </div>
+          );
+        }
+      })}
+      {loading && <h1>Loading</h1>}
     </div>
   );
 };
@@ -54,6 +61,7 @@ const mapStateToProps = (state) => {
   return {
     gameList: state.gameList,
     loading: state.loading,
+    page: state.page,
   };
 };
 
