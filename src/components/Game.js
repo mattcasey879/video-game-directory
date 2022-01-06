@@ -9,18 +9,19 @@ const Game = (props) => {
   const { push } = useHistory();
   useEffect(() => {
     props.getGameById(id);
-    console.log(game);
+    console.log(game); // eslint-disable-next-line
   }, []);
   const handleClick = () => {
     push("/");
+    window.location.reload()
   };
   return (
     <div>
       {loading ? (
-        <h1>Loading</h1>
+        <div className="spinner"></div>
       ) : (
         <div>
-          <img src={game.background_image} alt="game pic" />
+          <img className="game-component"src={game.background_image} alt="game pic" />
           <h1>{game.name}</h1>
 
           <p>{game.description_raw}</p>
@@ -34,6 +35,7 @@ const mapStateToProps = (state) => {
   return {
     game: state.game,
     loading: state.loading,
+    gameList: state.gameList
   };
 };
 

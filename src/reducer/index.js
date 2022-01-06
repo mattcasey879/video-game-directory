@@ -3,7 +3,8 @@ import {
     GET_GAME_LIST_SUCCESS,
     GET_GAME_LIST_FAIL,
     GET_GAME_SUCCESS,
-    GET_GAME_FAIL
+    GET_GAME_FAIL,
+    SEARCHING_FOR_GAME
 } from '../actions/index'
 
 const INITIAL_STATE = {
@@ -11,7 +12,9 @@ const INITIAL_STATE = {
     loading: false,
     error: null,
     game: {},
-    page: 1
+    page: 1,
+    searching: false,
+    searchedList: []
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -46,6 +49,13 @@ const reducer = (state = INITIAL_STATE, action) => {
             loading: false,
             error: action.payload
         })
+        case SEARCHING_FOR_GAME:
+            return({
+                ...state,
+                searching: true,
+                loading: false,
+                searchedList: action.payload,
+            })
         default:
             return state
     }
