@@ -1,0 +1,165 @@
+*{
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.games-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+.gameTitle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  visibility: hidden;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 25% 50% 25;
+  text-align: center;
+  transition: opacity .2s, visibility .2s;
+}
+.game-container{
+  position: relative;
+  margin: .3%;
+  margin-bottom: none;
+  border-radius: 5%;
+  max-width: min-content;
+}
+.game-pic:hover .gameTitle{
+  visibility: visible;
+  opacity: 1;
+}
+img {
+  position: relative;
+  width:300px;
+  height: 200px;
+  border-radius: 3%;
+}
+.layer{
+  visibility: hidden;
+  opacity: 0;
+  background-color: rgb(97, 86, 86);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height:98%;
+  border-radius: 3%;
+  transition: opacity .5s, visibility .5s;
+  
+}
+.game-pic:hover .layer{
+  visibility: visible;
+  opacity: .6;
+  border-radius: 3%;
+  transition: opacity .5s, visibility .5s;
+  
+  
+}
+.platform-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.spinner {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border: 3px solid rgba(255, 255, 255, .3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+  margin-left: 50%;
+  margin-top: 10%;
+}
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+.searchedGame {
+  color:white;
+  transition: .5s;
+}
+.searchedGame:hover{
+  color: gray;
+  transition: .5s;
+}
+.platforms{
+  display: flex;
+  justify-content: center;
+}
+.iconify{
+  padding: 1.25%;
+}
+.game-component {
+  width: 40%;
+  height: 500px;
+  left: 7%;
+  margin: 2%;
+  text-align: center;
+  border-radius: 10px;
+}
+.game-comTitle{
+  text-align: center;
+}
+.game-des{
+  text-align: center;
+  padding: 3%;
+  line-height: 30px;
+  font-size: 1.3rem;
+}
+.available-plats{
+  text-align: center;
+}
+.game-filter{
+  margin: 25%;
+  padding-left: 1%;
+  margin-bottom: 3%;
+  color:white;
+}
+input {
+  margin-left: .5%;
+  margin-bottom: 2%;
+  padding-left: 1%;
+  background: transparent;
+  font-size: 1.3rem;
+  border-style: solid;
+  border-color: black;
+  border-radius: 5px;
+  border-width: 1px;
+  transition: border 400ms;
+}
+input:focus{
+  color: white;
+  outline: none;
+  border:solid 1px gray;
+  transition: border 400ms;
+}
+.app-title {
+  text-align: center;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+.back-btn{
+  font-size: 2rem;
+  color: white;
+  margin-left: 25%;
+  padding-bottom: 3%;
+  transition: 500ms;
+}
+.back-btn:hover{
+  cursor: pointer;
+  color: gray;
+  transition: 500ms;
+}
