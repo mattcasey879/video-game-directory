@@ -7,6 +7,8 @@ const Home = (props) => {
   useEffect(() => {
     props.getGameList(1); // eslint-disable-next-line
   }, []);
+  
+  // infinte-scrolling implemented here
   const observer = useRef(); // eslint-disable-next-line
   const lastGame = useCallback((node) => {
     if (props.loading) return;
@@ -18,6 +20,9 @@ const Home = (props) => {
     });
     if (node) observer.current.observe(node);
   });
+  //
+
+
   const [query, setQuery] = useState("");
   const { gameList, loading } = props;
   const handleSearch = (e) => {
@@ -32,13 +37,16 @@ const Home = (props) => {
 
   return (
     <div>
+      <h1 className="app-title">A Game Directory has no name(tee-hee GOT)</h1>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={query}
-          onChange={handleSearch}
-          placeholder="search for a game!"
-        ></input>
+        <label className="game-filter"> Looking for a specific game?
+          <input
+            type="text"
+            value={query}
+            onChange={handleSearch}
+            placeholder="search here!"
+          ></input>
+        </label>
       </form>
       {query !== "" &&
         props.searchedList.map((g) => (
@@ -78,6 +86,7 @@ const Home = (props) => {
             );
           }
         })}
+
         {loading && <div className="spinner"></div>}
       </div>
     </div>

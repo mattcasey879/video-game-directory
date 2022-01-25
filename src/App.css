@@ -1,4 +1,6 @@
-
+*{
+  font-family: 'Josefin Sans', sans-serif;
+}
 
 .games-container{
   display: flex;
@@ -92,4 +94,72 @@ img {
 .searchedGame:hover{
   color: gray;
   transition: .5s;
+}
+.platforms{
+  display: flex;
+  justify-content: center;
+}
+.iconify{
+  padding: 1.25%;
+}
+.game-component {
+  width: 40%;
+  height: 500px;
+  left: 7%;
+  margin: 2%;
+  text-align: center;
+  border-radius: 10px;
+}
+.game-comTitle{
+  text-align: center;
+}
+.game-des{
+  text-align: center;
+  padding: 3%;
+  line-height: 30px;
+  font-size: 1.3rem;
+}
+.available-plats{
+  text-align: center;
+}
+.game-filter{
+  margin: 25%;
+  padding-left: 1%;
+  margin-bottom: 3%;
+  color:white;
+}
+input {
+  margin-left: .5%;
+  margin-bottom: 2%;
+  padding-left: 1%;
+  background: transparent;
+  font-size: 1.3rem;
+  border-style: solid;
+  border-color: black;
+  border-radius: 5px;
+  border-width: 1px;
+  transition: border 400ms;
+}
+input:focus{
+  color: white;
+  outline: none;
+  border:solid 1px gray;
+  transition: border 400ms;
+}
+.app-title {
+  text-align: center;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+.back-btn{
+  font-size: 2rem;
+  color: white;
+  margin-left: 25%;
+  padding-bottom: 3%;
+  transition: 500ms;
+}
+.back-btn:hover{
+  cursor: pointer;
+  color: gray;
+  transition: 500ms;
 }
