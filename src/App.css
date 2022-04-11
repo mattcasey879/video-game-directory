@@ -23,7 +23,7 @@
 }
 .game-container{
   position: relative;
-  margin: .5%;
+  margin: .5% !important;
   margin-bottom: none;
   border-radius: 5%;
   max-width: min-content;
