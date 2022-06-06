@@ -18,7 +18,6 @@ export const getGameList = (pageNum) => (dispatch) => {
       `https://api.rawg.io/api/games?key=${api_key}&page_size=24&page=${pageNum}`
     )
     .then((res) => {
-      console.log(res.data.results)
       dispatch({ type: GET_GAME_LIST_SUCCESS, payload: res.data.results });
     })
     .catch((err) => {
