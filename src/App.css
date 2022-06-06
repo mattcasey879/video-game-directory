@@ -75,7 +75,6 @@ img {
   border-top-color: #fff;
   animation: spin 1s ease-in-out infinite;
   -webkit-animation: spin 1s ease-in-out infinite;
-  margin-left: 50%;
   margin-top: 10%;
 }
 @keyframes spin {
