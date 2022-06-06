@@ -34,10 +34,9 @@ const Home = (props) => {
   }, [query]);
 
   const handleSubmit = (e) => {};
-
   return (
     <div>
-      <h1 className="app-title">A Game Directory has no name(tee-hee GOT)</h1>
+      <h1 data-testid='header' className="app-title">Video Game Directory</h1>
       <form onSubmit={handleSubmit}>
         <label className="game-filter"> Looking for a specific game?
           <input
@@ -58,7 +57,7 @@ const Home = (props) => {
         {gameList.map((game, index) => {
           if (gameList.length === index + 1) {
             return (
-              <div ref={lastGame} className="game-container" key={game.slug}>
+              <div data-testid='game' ref={lastGame} className="game-container" key={game.slug}>
                 <Link
                   className="game-pic"
                   to={`/game/${game.id}`}
