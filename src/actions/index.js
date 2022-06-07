@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 export const GET_GAME_LIST_SUCCESS = "GET_GAME_LIST_SUCCESS";
 export const GET_GAME_LIST_FAIL = "GET_GAME_LIST_FAIL";
 
@@ -9,7 +10,7 @@ export const GET_GAME_FAIL = "GET_GAME_FAIL";
 export const GET_GAME_LOADING = "GET_GAME_LOADING";
 export const SEARCHING_FOR_GAME = "SEARCHING_FOR_GAME";
 
-const api_key = "ccf87acd225b44498a3b6dd28aaa475b";
+const api_key = process.env.REACT_APP_API_KEY;
 
 export const getGameList = (pageNum) => (dispatch) => {
   dispatch({ type: GET_GAME_LOADING });
