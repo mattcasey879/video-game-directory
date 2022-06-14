@@ -4,11 +4,11 @@ import { getGameById } from "../actions";
 import { connect } from "react-redux";
 
 const Game = (props) => {
-  const { game, loading } = props;
+  const { game, loading, getGameById } = props;
   const { id } = useParams();
   useEffect(() => {
-    props.getGameById(id); //eslint-disable-next-line
-  }, []);
+    getGameById(id);
+  }, [id, getGameById]);
 
   const history = useHistory();
 

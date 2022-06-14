@@ -4,34 +4,35 @@ import { connect } from "react-redux";
 import { getGameList, getGameByName } from "../actions";
 
 const Home = (props) => {
+  let { getGameList, getGameByName, page, gameList, loading } = props
+
   useEffect(() => {
-    props.getGameList(1); // eslint-disable-next-line
-  }, []);
+    getGameList(1); 
+  }, [getGameList]);
   
   // infinte-scrolling implemented here
-  const observer = useRef(); // eslint-disable-next-line
+  const observer = useRef();
   const lastGame = useCallback((node) => {
-    if (props.loading) return;
+    if (loading) return;
     if (observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        props.getGameList(props.page);
+        getGameList(page);
       }
     });
     if (node) observer.current.observe(node);
-  });
+  }, [getGameList, page, loading]);
   //
 
 
   const [query, setQuery] = useState("");
-  const { gameList, loading } = props;
   const handleSearch = (e) => {
     setQuery(e.target.value);
     e.preventDefault();
   };
   useEffect(() => {
-    props.getGameByName(query); // eslint-disable-next-line
-  }, [query]);
+    getGameByName(query); 
+  }, [getGameByName, query]);
 
   const handleSubmit = (e) => {};
   return (
@@ -55,9 +56,8 @@ const Home = (props) => {
         ))}
       <div className="games-container">
         {gameList.map((game, index) => {
-          if (gameList.length === index + 1) {
             return (
-              <div data-testid='game' ref={lastGame} className="game-container" key={game.slug}>
+              <div data-testid='game' ref={gameList.length === index + 1 ? lastGame: null} className="game-container" key={game.slug}>
                 <Link
                   className="game-pic"
                   to={`/game/${game.id}`}
@@ -69,21 +69,6 @@ const Home = (props) => {
                 </Link>
               </div>
             );
-          } else {
-            return (
-              <div className="game-container" key={game.slug}>
-                <Link
-                  className="game-pic"
-                  to={`/game/${game.id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <img src={game.background_image} alt="Cover of game" />
-                  <div className="layer"></div>
-                  <h2 className="gameTitle">{game.name}</h2>
-                </Link>
-              </div>
-            );
-          }
         })}
 
         {loading && <div className="spinner"></div>}
