@@ -1,0 +1,6 @@
+version: '1'
+services:
+  videogame-dir:
+    image: mattcasey879/videogame-dir:1.0
+    ports:
+      - 8080:3000
